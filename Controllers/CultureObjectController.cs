@@ -7,7 +7,7 @@ using Span.Culturio.Api.Services.CultureObject;
 using System.ComponentModel.DataAnnotations;
 
 namespace Span.Culturio.Api.Controllers {
-    [Tags("Culture Objects")]
+    [Tags("Culture objects")]
     [Route("culture-objects")]
     [ApiController]
     public class CultureObjectController : ControllerBase {
@@ -39,7 +39,7 @@ namespace Span.Culturio.Api.Controllers {
         /// Get culture object by Id
         /// </summary>
         [HttpGet("{id}")]
-        public async Task<ActionResult<CultureObjectDto>> Get(int id) {
+        public async Task<ActionResult<CultureObjectDto>> Get([Required]int id) {
             var cultureObjectDto = await _cultureObjectService.GetCultureObjectAsync(id);
             if (cultureObjectDto is null) {
                 return NotFound("Not found");

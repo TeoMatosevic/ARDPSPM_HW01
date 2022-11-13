@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Span.Culturio.Api.Models.Authorization;
 using Span.Culturio.Api.Models.User;
 using Span.Culturio.Api.Services.User;
+using System.ComponentModel.DataAnnotations;
 
 namespace Span.Culturio.Api.Controllers {
     [Tags("Auth")]
-    [Route("[controller]")]
+    [Route("auth")]
     [ApiController]
     public class AuthorizationController : ControllerBase {
 
@@ -18,10 +19,12 @@ namespace Span.Culturio.Api.Controllers {
             _userService = userService;
             _validator = validator;
         }
-
+        /// <summary>
+        /// Register new user
+        /// </summary>
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> RegisterUser(RegisterUserDto registerUserDto) {
-            ValidationResult result = _validator.Validate(registerUserDto);
+        public async Task<ActionResult<UserDto>> RegisterUser([Required]RegisterUserDto registerUserDto) {
+            FluentValidation.Results.ValidationResult result = _validator.Validate(registerUserDto);
             if (!result.IsValid) return BadRequest("Validation error");
 
             var user = await _userService.RegisterUser(registerUserDto);
@@ -29,8 +32,11 @@ namespace Span.Culturio.Api.Controllers {
 
             return Ok("Successful response");
         }
+        /// <summary>
+        /// Login
+        /// </summary>
         [HttpPost("login")]
-        public async Task<ActionResult<TokenDto>> Login(LoginDto loginUserDto) {
+        public async Task<ActionResult<TokenDto>> Login([Required]LoginDto loginUserDto) {
             var token = await _userService.Login(loginUserDto);
             if (token is null) return BadRequest("Bad username or password");
 
