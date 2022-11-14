@@ -16,7 +16,7 @@ namespace Span.Culturio.Api.Services.Package {
         }
 
         public async Task<PackageDto> CreatePackageAsync(CreatePackageDto createPackageDto) {
-            var createPackageItemsDto = createPackageDto.PackageItems;
+            var createPackageItemsDto = createPackageDto.CultureObjects;
 
             var package = _mapper.Map<Data.Entities.Package>(createPackageDto);
             var packageItems = _mapper.Map<List<PackageItem>>(createPackageItemsDto);

@@ -17,15 +17,15 @@ namespace Span.Culturio.Api.Controllers {
         /// Create package
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> CreatePackageAsync([FromBody] CreatePackageDto createPackageDto) {
+        public async Task<ActionResult<PackageDto>> CreatePackageAsync([FromBody] CreatePackageDto createPackageDto) {
             var package = await _packageService.CreatePackageAsync(createPackageDto);
             return Ok(package);
         }
         /// <summary>
-        /// Get paclages
+        /// Get packages
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetPackagesAsync() {
+        public async Task<ActionResult<List<PackageDto>>> GetPackagesAsync() {
             var packages = await _packageService.GetPackagesAsync();
             return Ok(packages);
         }

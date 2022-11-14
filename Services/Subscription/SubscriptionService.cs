@@ -102,7 +102,7 @@ namespace Span.Culturio.Api.Services.Subscriptions {
 
             Boolean IsValid = false;
             cultureObjects.ForEach(x => {
-                if (x.Id == trackVisitDto.CultureObjectId) {
+                if (x.CultureObjectId == trackVisitDto.CultureObjectId) {
                     IsValid = true;
                 }
             });
