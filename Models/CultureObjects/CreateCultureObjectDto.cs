@@ -3,7 +3,6 @@
 namespace Span.Culturio.Api.Models.CultureObjects {
     public class CreateCultureObjectDto {
         public string Name { get; set; }
-        public int CompanyId { get; set; }
         public string ContactEmail { get; set; }
         public int ZipCode { get; set; }
         public string Address { get; set; }
@@ -14,7 +13,6 @@ namespace Span.Culturio.Api.Models.CultureObjects {
     public class CreateCultureObjectValidator : AbstractValidator<CreateCultureObjectDto> {
         public CreateCultureObjectValidator() {
             RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
-            RuleFor(x => x.CompanyId).NotEmpty().GreaterThanOrEqualTo(1);
             RuleFor(x => x.ContactEmail).NotEmpty().MaximumLength(255);
             RuleFor(x => x.Address).NotEmpty().MaximumLength(250);
             RuleFor(x => x.ZipCode).NotEmpty().GreaterThanOrEqualTo(1);
